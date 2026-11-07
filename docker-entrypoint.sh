@@ -14,7 +14,35 @@ mkdir -p /var/www/html/core/storage/framework/cache/data \
          /var/www/html/core/storage/logs \
          /var/www/html/core/bootstrap/cache
 
-chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets
+# Generate /var/www/html/core/.env from environment variables if not present so AppServiceProvider won't redirect to install
+if [ ! -f /var/www/html/core/.env ] || [ ! -s /var/www/html/core/.env ]; then
+    echo "Creating core/.env from environment variables..."
+    cat <<ENVEOF > /var/www/html/core/.env
+APP_NAME="${APP_NAME:-TrustCapital}"
+APP_ENV="${APP_ENV:-production}"
+APP_KEY="${APP_KEY}"
+APP_DEBUG="${APP_DEBUG:-false}"
+APP_URL="${APP_URL:-https://trustcapitals.ltd}"
+
+LOG_CHANNEL=stack
+
+DB_CONNECTION="${DB_CONNECTION:-mysql}"
+DB_HOST="${DB_HOST:-mysql-trustcapitalwiz-michaelraymond1840-4a99.b.aivencloud.com}"
+DB_PORT="${DB_PORT:-18509}"
+DB_DATABASE="${DB_DATABASE:-defaultdb}"
+DB_USERNAME="${DB_USERNAME:-avnadmin}"
+DB_PASSWORD="${DB_PASSWORD:-AVNS_K4LWDHk-u14QYebzxop}"
+
+BROADCAST_CONNECTION=log
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+CACHE_STORE=file
+CACHE_DRIVER=file
+SESSION_LIFETIME=120
+ENVEOF
+fi
+
+chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets /var/www/html/core/.env
 chmod -R 775 /var/www/html/core/storage /var/www/html/core/bootstrap/cache
 
 # Clear and cache configurations
