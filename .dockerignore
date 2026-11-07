@@ -1,0 +1,11 @@
+.git
+.github
+*.sql
+install/
+error_log
+core/.env
+core/temp/
+core/storage/logs/*.log
+core/storage/framework/cache/data/*
+core/storage/framework/sessions/*
+core/storage/framework/views/*

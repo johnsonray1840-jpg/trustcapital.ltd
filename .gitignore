@@ -1,0 +1,28 @@
+# Environment & secrets
+.env
+core/.env
+core/.env.backup
+core/.env.production
+
+# Dependencies
+vendor/
+core/vendor/
+node_modules/
+core/node_modules/
+
+# Logs & cache
+error_log
+core/storage/logs/*.log
+core/storage/framework/cache/data/*
+core/storage/framework/sessions/*
+core/storage/framework/views/*
+core/bootstrap/cache/*.php
+.phpunit.cache
+core/.phpunit.cache
+
+# Database dumps
+*.sql
+
+# System files
+.DS_Store
+Thumbs.db
