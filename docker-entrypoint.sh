@@ -8,7 +8,7 @@ if [ -n "$PORT" ]; then
     sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:$PORT>/" /etc/apache2/sites-available/000-default.conf
 fi
 
-# Ensure storage directories exist and are writable
+# Ensure storage directories exist and are fully writable by www-data
 mkdir -p /var/www/html/core/storage/framework/cache/data \
          /var/www/html/core/storage/framework/sessions \
          /var/www/html/core/storage/framework/views \
@@ -44,14 +44,15 @@ CACHE_DRIVER=file
 SESSION_LIFETIME=120
 ENVEOF
 
-chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets /var/www/html/core/.env
-chmod -R 775 /var/www/html/core/storage /var/www/html/core/bootstrap/cache
-
-# Run Laravel package discovery now that .env and DB settings exist
+# Clear caches before changing permissions so root does not create unreadable cache files
 cd /var/www/html/core
 php artisan package:discover --ansi || true
 php artisan config:clear || true
 php artisan cache:clear || true
 php artisan view:clear || true
+
+# Grant full ownership and 777 permissions to storage so www-data can create subfolders and files
+chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets /var/www/html/core/.env
+chmod -R 777 /var/www/html/core/storage /var/www/html/core/bootstrap/cache
 
 exec apache2-foreground
