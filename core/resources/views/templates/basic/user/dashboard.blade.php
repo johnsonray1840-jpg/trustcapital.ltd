@@ -189,18 +189,18 @@
                             </div>
                         </div>
 
-                        <!-- Gas Fee -->
+                        <!-- Transaction Fee -->
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="card border-0 h-100 shadow-sm hover-shadow">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-3">
                                         <div class="flex-shrink-0">
                                             <div class="avatar-sm rounded-circle bg-secondary bg-opacity-10 p-3">
-                                                <i class="fas fa-gas-pump text-secondary fs-4"></i>
+                                                <i class="fas fa-receipt text-secondary fs-4"></i>
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            <h6 class="mb-0">@lang('Gas Fee Paid')</h6>
+                                            <h6 class="mb-0">@lang('Transaction Fee Paid')</h6>
                                             <h3 class="mt-2 mb-0">{{ showAmount(@$widget['total_deposit']) }}</h3>
                                         </div>
                                     </div>

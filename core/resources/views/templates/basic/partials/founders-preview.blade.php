@@ -29,9 +29,9 @@
                         <div class="col-md-7">
                             <div class="card-body p-4">
                                 <h4 class="fw-bold mb-1">Šešok Druzina</h4>
-                                <p class="text-primary fw-bold mb-2">CEO & Co-Founder</p>
+                                <p class="text-primary fw-bold mb-2">Co-Founder & Lead Investor</p>
                                 <p class="text-muted mb-3">
-                                    CEO & Co-Founder of Šešok Capital Partners.
+                                    Co-Founder & Lead Investor of Šešok Capital Partners.
 18 years of pioneering strategic equity deployment and growth capital structuring for industry-transforming ventures.
                                 </p>
                                 <div class="founder-badges mb-3">
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-8">
                                 <h4 class="fw-bold mb-1">DR Jeffery Williams</h4>
-                                <p class="text-success fw-bold mb-2">Lead Investor & Board Advisor</p>
+                                <p class="text-success fw-bold mb-2">Shareholder & Board Advisor</p>
                                 <p class="text-muted mb-3">
                                     Angel investor with 30+ early-stage investments. 
                                     Former Google executive with deep Silicon Valley connections.

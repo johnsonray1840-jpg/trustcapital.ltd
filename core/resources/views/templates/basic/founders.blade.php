@@ -56,7 +56,7 @@
                             <div class="col-md-7">
                                 <div class="card-body p-4">
                                     <h3 class="card-title mb-1">Sesok Druzina</h3>
-                                    <p class="text-primary fw-bold mb-3">Chairman & Co-Founder</p>
+                                    <p class="text-primary fw-bold mb-3">Co-Founder & Lead Investor</p>
                                     
                                     <div class="badge bg-light text-dark mb-3 p-2">
                                         <i class="las la-industry me-1"></i> Iskra Group Legacy
@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <h3 class="mb-2">DR Jeffery Williams</h3>
-                                    <p class="text-success fw-bold mb-3">Lead Investor & Board Advisor</p>
+                                    <p class="text-success fw-bold mb-3">Shareholder & Board Advisor</p>
                                     
                                     <p class="mb-4">
                                         Angel investor with 30+ early-stage investments. 

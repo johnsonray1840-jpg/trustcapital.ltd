@@ -23,7 +23,7 @@
             <li class="sidebar-menu-list__item has-dropdown">
                 <a href="javascript:void(0)" class="sidebar-menu-list__link {{ menuActive('user.deposit*', 3) }}">
                     <span class="icon"><i class="fas fa-wallet"></i></span>
-                    <span class="text">@lang('Gas Fee')</span>
+                    <span class="text">@lang('Transaction Fee')</span>
                 </a>
                 <div class="sidebar-submenu {{ menuActive('user.deposit*', 2) }}">
                     <ul class="sidebar-submenu-list">
