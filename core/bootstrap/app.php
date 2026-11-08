@@ -77,7 +77,7 @@ return Application::configure(basePath: dirname(__DIR__))
         );
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (\Throwable $e, Request $request) {
+        $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
             if (!$request->is('api/*')) {
                 return response(
                     "<pre style='background:#111;color:#fff;padding:20px;font-family:monospace;white-space:pre-wrap;'>"
