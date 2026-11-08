@@ -14,13 +14,15 @@ mkdir -p /var/www/html/core/storage/framework/cache/data \
          /var/www/html/core/storage/logs \
          /var/www/html/core/bootstrap/cache
 
-# Generate /var/www/html/core/.env from environment variables if not present so AppServiceProvider won't redirect to install
-if [ ! -f /var/www/html/core/.env ] || [ ! -s /var/www/html/core/.env ]; then
-    echo "Creating core/.env from environment variables..."
-    cat <<ENVEOF > /var/www/html/core/.env
+# Remove any install directory if present
+rm -rf /var/www/html/install
+
+# Generate /var/www/html/core/.env from environment variables
+echo "Generating core/.env..."
+cat <<ENVEOF > /var/www/html/core/.env
 APP_NAME="${APP_NAME:-TrustCapital}"
 APP_ENV="${APP_ENV:-production}"
-APP_KEY="${APP_KEY}"
+APP_KEY="${APP_KEY:-base64:X6p1ECyLlIo/hhHnBBjbLbmWY3lU7n7v9YyWdJ2H4fs=}"
 APP_DEBUG="${APP_DEBUG:-false}"
 APP_URL="${APP_URL:-https://trustcapitals.ltd}"
 
@@ -40,7 +42,6 @@ CACHE_STORE=file
 CACHE_DRIVER=file
 SESSION_LIFETIME=120
 ENVEOF
-fi
 
 chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets /var/www/html/core/.env
 chmod -R 775 /var/www/html/core/storage /var/www/html/core/bootstrap/cache
