@@ -3,8 +3,9 @@ set -e
 
 # Configure Apache port dynamically if PORT is provided by Render
 if [ -n "$PORT" ]; then
+    echo "Configuring Apache port to $PORT..."
     sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf
-    sed -i "s/:80/:$PORT/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:$PORT>/" /etc/apache2/sites-available/000-default.conf
 fi
 
 # Ensure storage directories exist and are writable
