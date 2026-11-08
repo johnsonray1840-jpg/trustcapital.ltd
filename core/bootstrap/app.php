@@ -77,6 +77,18 @@ return Application::configure(basePath: dirname(__DIR__))
         );
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->render(function (\Throwable $e, Request $request) {
+            if (!$request->is('api/*')) {
+                return response(
+                    "<pre style='background:#111;color:#fff;padding:20px;font-family:monospace;white-space:pre-wrap;'>"
+                    . "<b>Exception:</b> " . htmlspecialchars($e->getMessage()) . "\n"
+                    . "<b>File:</b> " . htmlspecialchars($e->getFile()) . " (Line: " . $e->getLine() . ")\n\n"
+                    . "<b>Trace:</b>\n" . htmlspecialchars($e->getTraceAsString())
+                    . "</pre>",
+                    500
+                );
+            }
+        });
         $exceptions->shouldRenderJsonWhen(function () {
             if (request()->is('api/*')) {
                 return true;
