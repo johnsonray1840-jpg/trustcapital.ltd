@@ -66,8 +66,7 @@ class LoginController extends Controller
             return back()->withNotify($notify);
         }
 
-
-        Onumoti::getData();
+        // Onumoti::getData();
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and

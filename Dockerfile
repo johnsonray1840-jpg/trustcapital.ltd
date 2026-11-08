@@ -49,15 +49,6 @@ COPY . /var/www/html
 # Install Composer dependencies
 RUN cd core && composer install --no-dev --no-scripts --optimize-autoloader --no-interaction
 
-# Neutralize laramin utility package during Docker build
-RUN mkdir -p /var/www/html/core/vendor/laramin/utility/src && \
-    echo '<?php namespace Laramin\Utility; use Illuminate\Support\ServiceProvider; class UtilityServiceProvider extends ServiceProvider { public function boot() {} public function register() {} }' > /var/www/html/core/vendor/laramin/utility/src/UtilityServiceProvider.php && \
-    echo '<?php namespace Laramin\Utility; class Helpmate { public static function sysPass() { return true; } public static function appUrl() { return ""; } }' > /var/www/html/core/vendor/laramin/utility/src/Helpmate.php && \
-    echo '<?php namespace Laramin\Utility; use Closure; class Utility { public function handle($request, Closure $next) { return $next($request); } }' > /var/www/html/core/vendor/laramin/utility/src/Utility.php && \
-    echo '<?php namespace Laramin\Utility; use Closure; class GoToCore { public function handle($request, Closure $next) { return $next($request); } }' > /var/www/html/core/vendor/laramin/utility/src/GoToCore.php && \
-    echo '<?php namespace Laramin\Utility; class Onumoti { public static function getData() {} public static function mySite($site, $c) {} }' > /var/www/html/core/vendor/laramin/utility/src/Onumoti.php && \
-    echo '<?php // Neutralized' > /var/www/html/core/vendor/laramin/utility/src/routes.php
-
 # Set appropriate permissions
 RUN chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets \
     && chmod -R 775 /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets
