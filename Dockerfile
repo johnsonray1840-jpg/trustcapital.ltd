@@ -29,8 +29,8 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . /var/www/html
 
-# Install Composer dependencies
-RUN cd core && composer install --no-dev --optimize-autoloader --no-interaction
+# Install Composer dependencies without running post-install discovery scripts (which require live DB)
+RUN cd core && composer install --no-dev --no-scripts --optimize-autoloader --no-interaction
 
 # Set appropriate permissions
 RUN chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets \

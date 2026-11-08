@@ -46,8 +46,9 @@ ENVEOF
 chown -R www-data:www-data /var/www/html/core/storage /var/www/html/core/bootstrap/cache /var/www/html/assets /var/www/html/core/.env
 chmod -R 775 /var/www/html/core/storage /var/www/html/core/bootstrap/cache
 
-# Clear and cache configurations
+# Run Laravel package discovery now that .env and DB settings exist
 cd /var/www/html/core
+php artisan package:discover --ansi || true
 php artisan config:clear || true
 php artisan cache:clear || true
 php artisan view:clear || true
