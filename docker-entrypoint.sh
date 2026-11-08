@@ -23,10 +23,10 @@ cat <<ENVEOF > /var/www/html/core/.env
 APP_NAME="${APP_NAME:-TrustCapital}"
 APP_ENV="${APP_ENV:-production}"
 APP_KEY="${APP_KEY:-base64:X6p1ECyLlIo/hhHnBBjbLbmWY3lU7n7v9YyWdJ2H4fs=}"
-APP_DEBUG="${APP_DEBUG:-false}"
+APP_DEBUG=true
 APP_URL="${APP_URL:-https://trustcapitals.ltd}"
 
-LOG_CHANNEL=stack
+LOG_CHANNEL=errorlog
 
 DB_CONNECTION="${DB_CONNECTION:-mysql}"
 DB_HOST="${DB_HOST:-mysql-trustcapitalwiz-michaelraymond1840-4a99.b.aivencloud.com}"
