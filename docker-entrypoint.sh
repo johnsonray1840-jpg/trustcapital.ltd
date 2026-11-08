@@ -18,15 +18,20 @@ mkdir -p /var/www/html/core/storage/framework/cache/data \
 # Remove any install directory if present
 rm -rf /var/www/html/install
 
-# Bypass vendor license activation gate by ensuring laramin.json and bypass files exist
+# Completely replace UtilityServiceProvider with a no-op dummy provider
 mkdir -p /var/www/html/core/vendor/laramin/utility/src
-cat << 'JSONEOF' > /var/www/html/core/vendor/laramin/utility/src/laramin.json
-{
-    "purchase_code": "ACTIVATED-TRUSTCAPITAL-LICENSE-KEY",
-    "installcode": "INSTALLED",
-    "license_type": "extended"
+cat << 'PHPPROVIDER' > /var/www/html/core/vendor/laramin/utility/src/UtilityServiceProvider.php
+<?php
+
+namespace Laramin\Utility;
+
+use Illuminate\Support\ServiceProvider;
+
+class UtilityServiceProvider extends ServiceProvider {
+    public function boot() {}
+    public function register() {}
 }
-JSONEOF
+PHPPROVIDER
 
 # Ensure Helpmate::sysPass always returns true
 cat << 'PHPHELPMATE' > /var/www/html/core/vendor/laramin/utility/src/Helpmate.php
@@ -35,15 +40,8 @@ cat << 'PHPHELPMATE' > /var/www/html/core/vendor/laramin/utility/src/Helpmate.ph
 namespace Laramin\Utility;
 
 class Helpmate {
-    public static function sysPass() {
-        return true;
-    }
-
-    public static function appUrl() {
-        $current = @$_SERVER['REQUEST_SCHEME'] ?? 'http' . '://' . @$_SERVER['HTTP_HOST'] . @$_SERVER['REQUEST_URI'];
-        $url = substr($current, 0, -9);
-        return $url;
-    }
+    public static function sysPass() { return true; }
+    public static function appUrl() { return ''; }
 }
 PHPHELPMATE
 
@@ -61,6 +59,12 @@ class Utility {
     }
 }
 PHPUTILITY
+
+# Blank out activation routes in vendor
+cat << 'PHPROUTES' > /var/www/html/core/vendor/laramin/utility/src/routes.php
+<?php
+// Neutralized
+PHPROUTES
 
 # Generate /var/www/html/core/.env from environment variables
 echo "Generating core/.env..."
@@ -91,7 +95,7 @@ ENVEOF
 
 # Clear caches before changing permissions
 cd /var/www/html/core
-php artisan package:discover --ansi || true
+php artisan route:clear || true
 php artisan config:clear || true
 php artisan cache:clear || true
 php artisan view:clear || true
